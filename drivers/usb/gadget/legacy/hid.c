@@ -335,7 +335,7 @@ static int __init hidg_init(void)
     status = platform_device_register(&my_hid);
     if (status < 0)
     {
-        platform_driver_unregister(&my_hid);
+//         platform_driver_unregister(&my_hid);3
         return status;
     }
     //add end 3
@@ -359,7 +359,7 @@ static void __exit hidg_cleanup(void)
     
 	usb_composite_unregister(&hidg_driver);
 		    //add 4
-//     platform_device_unregister(&my_hid);
+//     platform_device_unregister(&my_hid);4
 	platform_driver_unregister(&hidg_plat_driver);
 }
 module_exit(hidg_cleanup);
