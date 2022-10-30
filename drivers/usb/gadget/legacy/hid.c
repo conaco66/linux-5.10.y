@@ -68,6 +68,43 @@ static struct hidg_func_descriptor my_hid_data = {
         0xc0        /* END_COLLECTION */
     }
 };
+//add 1-2
+/*hid descriptor for a mouse*/
+static struct hidg_func_descriptor my_mouse_hid_data = {
+    .subclass = 0,    /*NO SubClass*/
+    .protocol = 2,    /*Mouse*/
+    .report_length = 4,
+    .report_desc_length = 52,
+    .report_desc={
+        0x05,0x01,    /*Usage Page (Generic Desktop Controls)*/
+        0x09,0x02,    /*Usage (Mouse)*/
+        0xa1,0x01,    /*Collction (Application)*/
+        0x09,0x01,    /*Usage (pointer)*/
+        0xa1,0x00,    /*Collction (Physical)*/
+        0x05,0x09,    /*Usage Page (Button)*/
+        0x19,0x01,    /*Usage Minimum(1)*/
+        0x29,0x03,    /*Usage Maximum(3) */ 
+        0x15,0x00,    /*Logical Minimum(1)*/
+        0x25,0x01,    /*Logical Maximum(1)*/
+        0x95,0x03,    /*Report Count(5)  */
+        0x75,0x01,    /*Report Size(1)*/
+        0x81,0x02,    /*Input(Data,Variable,Absolute,BitFiled)*/
+        0x95,0x01,    /*Report Count(1)*/
+        0x75,0x05,    /*Report Size(5) */
+        0x81,0x01,    /*Input(Constant,Array,Absolute,BitFiled) */
+        0x05,0x01,    /*Usage Page (Generic Desktop Controls)*/
+        0x09,0x30,    /*Usage(x)*/
+        0x09,0x31,    /*Usage(y)*/
+        0x09,0x38,    /*Usage(Wheel)*/
+        0x15,0x81,    /*Logical Minimum(-127)*/
+        0x25,0x7f,    /*Logical Maximum(127)*/
+        0x75,0x08,    /*Report Size(8)*/
+        0x95,0x02,    /*Report Count(2)  */
+        0x81,0x06,    /*Input(Data,Variable,Relative,BitFiled)*/
+        0xc0,    /*End Collection*/
+        0xc0    /*End Collection*/
+    }
+};
 
 //add 2
 static struct platform_device my_hid = {
@@ -76,6 +113,14 @@ static struct platform_device my_hid = {
     .num_resources = 0,
     .resource    = 0,
     .dev.platform_data = &my_hid_data,
+};
+//add 2-2
+static struct platform_device my_mouse_hid = {
+    .name = "hidg",
+    .id            = 1,
+    .num_resources = 0,
+    .resource    = 0,
+    .dev.platform_data = &my_mouse_hid_data,
 };
 
 struct hidg_func_node {
@@ -339,7 +384,14 @@ static int __init hidg_init(void)
         return status;
     }
     //add end 3
-
+    //add 3-3
+    status = platform_device_register(&my_mouse_hid);
+    if (status < 0)
+    {
+//         platform_driver_unregister(&my_hid);3
+        return status;
+    }
+    //add end 3-3
 	status = platform_driver_probe(&hidg_plat_driver,
 				hidg_plat_driver_probe);
 	if (status < 0)
