@@ -185,6 +185,7 @@ static struct usb_gadget_strings *dev_strings[] = {
 
 static int do_config(struct usb_configuration *c)
 {
+	pr_err("do_config\n");
 	struct hidg_func_node *e, *n;
 	int status = 0;
 
@@ -228,6 +229,7 @@ static struct usb_configuration config_driver = {
 
 static int hid_bind(struct usb_composite_dev *cdev)
 {
+	pr_err("hid_bind\n");
 	struct usb_gadget *gadget = cdev->gadget;
 	struct list_head *tmp;
 	struct hidg_func_node *n, *m;
@@ -302,6 +304,7 @@ put:
 
 static int hid_unbind(struct usb_composite_dev *cdev)
 {
+	pr_err("hid_unbind\n");
 	struct hidg_func_node *n;
 
 	list_for_each_entry(n, &hidg_func_list, node) {
@@ -317,6 +320,7 @@ static int hid_unbind(struct usb_composite_dev *cdev)
 
 static int hidg_plat_driver_probe(struct platform_device *pdev)
 {
+	pr_err("hidg_plat_driver_probe\n");
 	struct hidg_func_descriptor *func = dev_get_platdata(&pdev->dev);
 	struct hidg_func_node *entry;
 
@@ -337,6 +341,7 @@ static int hidg_plat_driver_probe(struct platform_device *pdev)
 
 static int hidg_plat_driver_remove(struct platform_device *pdev)
 {
+	pr_err("hidg_plat_driver_remove\n");
 	struct hidg_func_node *e, *n;
 
 	list_for_each_entry_safe(e, n, &hidg_func_list, node) {
@@ -374,6 +379,7 @@ MODULE_LICENSE("GPL");
 
 static int __init hidg_init(void)
 {
+	pr_err("hidg_init\n");
 	int status;
 
     //add 3
@@ -408,7 +414,7 @@ module_init(hidg_init);
 static void __exit hidg_cleanup(void)
 {
 
-    
+	pr_err("hidg_cleanup\n");
 	usb_composite_unregister(&hidg_driver);
 		    //add 4
 //     platform_device_unregister(&my_hid);4
