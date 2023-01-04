@@ -386,26 +386,45 @@ static int __init hidg_init(void)
     status = platform_device_register(&my_hid);
     if (status < 0)
     {
+	pr_err("platform_device_register my_hid failed\n");
 //         platform_driver_unregister(&my_hid);3
         return status;
+    }else
+    {
+	pr_err("platform_device_register my_hid ok\n");
     }
     //add end 3
     //add 3-3
     status = platform_device_register(&my_mouse_hid);
     if (status < 0)
     {
+	pr_err("platform_device_register my_mouse_hid failed\n");
 //         platform_driver_unregister(&my_hid);3
         return status;
+    }else
+    {
+	pr_err("platform_device_register my_mouse_hid ok\n");
     }
     //add end 3-3
 	status = platform_driver_probe(&hidg_plat_driver,
 				hidg_plat_driver_probe);
 	if (status < 0)
+	{
+		pr_err("platform_driver_probe hidg_plat_driver failed\n");
 		return status;
-
+	}else
+	{
+		pr_err("platform_driver_probe hidg_plat_driver ok\n");
+	}
 	status = usb_composite_probe(&hidg_driver);
 	if (status < 0)
+	{
+		pr_err("usb_composite_probe hidg_driver failed\n");
 		platform_driver_unregister(&hidg_plat_driver);
+	}else
+	{
+		pr_err("usb_composite_probe hidg_driver ok\n");
+	}
 
 	return status;
 }
