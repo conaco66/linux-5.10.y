@@ -435,8 +435,9 @@ static void __exit hidg_cleanup(void)
 
 	pr_err("hidg_cleanup\n");
 	usb_composite_unregister(&hidg_driver);
-		    //add 4
-//     platform_device_unregister(&my_hid);4
+//add 4
+	platform_device_unregister(&my_hid);
+	platform_device_unregister(&my_mouse_hid);
 	platform_driver_unregister(&hidg_plat_driver);
 }
 module_exit(hidg_cleanup);
