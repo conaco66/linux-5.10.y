@@ -348,7 +348,7 @@ static int hidg_plat_driver_remove(struct platform_device *pdev)
 		list_del(&e->node);
 		kfree(e);
 	}
-
+	pr_err("hidg_plat_driver_remove return 0\n");
 	return 0;
 }
 
@@ -436,8 +436,11 @@ static void __exit hidg_cleanup(void)
 	pr_err("hidg_cleanup\n");
 	usb_composite_unregister(&hidg_driver);
 //add 4
+	pr_err("platform_device_unregister my_hid\n");
 	platform_device_unregister(&my_hid);
+	pr_err("platform_device_unregister my_mouse_hid\n");
 	platform_device_unregister(&my_mouse_hid);
+	pr_err("platform_driver_unregister hidg_plat_driver\n");
 	platform_driver_unregister(&hidg_plat_driver);
 }
 module_exit(hidg_cleanup);
