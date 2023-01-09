@@ -12,7 +12,8 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
-
+//add 0
+#include <linux/platform_device.h>
 #include "u_serial.h"
 
 #define DRIVER_DESC		"Composite Gadget (ACM + MS)"
@@ -110,8 +111,8 @@ static struct usb_device_descriptor device_desc = {
 
 	/* Vendor and product id can be overridden by module parameters.  */
 	//add 4 fix id
-	.idVendor =		cpu_to_le16(FSG_VENDOR_ID),
-	.idProduct =		cpu_to_le16(FSG_PRODUCT_ID),
+	.idVendor =		cpu_to_le16(0x0525),
+	.idProduct =		cpu_to_le16(0xa4a5),
 	/* .bcdDevice = f(hardware) */
 	/* .iManufacturer = DYNAMIC */
 	/* .iProduct = DYNAMIC */
