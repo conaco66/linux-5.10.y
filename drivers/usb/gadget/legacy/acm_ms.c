@@ -40,7 +40,8 @@
  * a "gcc --combine ... part1.c part2.c part3.c ... " build would.
  */
 #include "f_mass_storage.h"
-#include "f_hid.h"
+
+#include "f_hid.c"
 static struct hidg_func_descriptor lt_keyboard_data = {
     .subclass        = 0, /* No subclass */
     .protocol        = 1, /* Keyboard */
