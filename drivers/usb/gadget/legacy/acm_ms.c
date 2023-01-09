@@ -107,8 +107,8 @@ static struct usb_device_descriptor device_desc = {
 	/* .bMaxPacketSize0 = f(hardware) */
 
 	/* Vendor and product id can be overridden by module parameters.  */
-	.idVendor =		cpu_to_le16(FSG_VENDOR_ID),
-	.idProduct =		cpu_to_le16(FSG_PRODUCT_ID),	
+	.idVendor =		cpu_to_le16(0x0525),
+	.idProduct =		cpu_to_le16(0xa4a5),	
 	/* .bcdDevice = f(hardware) */
 	/* .iManufacturer = DYNAMIC */
 	/* .iProduct = DYNAMIC */
