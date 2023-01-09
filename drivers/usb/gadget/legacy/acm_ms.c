@@ -39,8 +39,8 @@
  * the runtime footprint, and giving us at least some parts of what
  * a "gcc --combine ... part1.c part2.c part3.c ... " build would.
  */
-#include "f_mass_storage.c"
-#include "f_hid.c"
+#include "f_mass_storage.h"
+#include "f_hid.h"
 static struct hidg_func_descriptor lt_keyboard_data = {
     .subclass        = 0, /* No subclass */
     .protocol        = 1, /* Keyboard */
