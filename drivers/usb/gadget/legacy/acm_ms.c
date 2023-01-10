@@ -468,14 +468,14 @@ static int hidg_plat_driver_remove(struct platform_device *pdev)
 /****************************** Some noise ******************************/
 
 
-static struct usb_composite_driver hidg_driver = {
-	.name		= "g_hid",
-	.dev		= &device_desc,
-	.strings	= dev_strings,
-	.max_speed	= USB_SPEED_HIGH,
-	.bind		= hid_bind,
-	.unbind		= hid_unbind,
-};
+// static struct usb_composite_driver hidg_driver = {
+// 	.name		= "g_hid",
+// 	.dev		= &device_desc,
+// 	.strings	= dev_strings,
+// 	.max_speed	= USB_SPEED_HIGH,
+// 	.bind		= hid_bind,
+// 	.unbind		= hid_unbind,
+// };
 
 static struct platform_driver hidg_plat_driver = {
 	.remove		= hidg_plat_driver_remove,
@@ -495,7 +495,7 @@ static struct usb_composite_driver acm_ms_driver = {
 	.unbind		= acm_ms_unbind,
 };
 
-module_usb_composite_driver(acm_ms_driver);
+//module_usb_composite_driver(acm_ms_driver);
 
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_AUTHOR("Klaus Schwarzkopf <schwarzkopf@sensortherm.de>");
@@ -541,14 +541,14 @@ static int __init hidg_init(void)
 	{
 		pr_err("platform_driver_probe hidg_plat_driver ok\n");
 	}
-	status = usb_composite_probe(&hidg_driver);
+	status = usb_composite_probe(&acm_ms_driver);
 	if (status < 0)
 	{
-		pr_err("usb_composite_probe hidg_driver failed\n");
+		pr_err("usb_composite_probe acm_ms_driver failed\n");
 		platform_driver_unregister(&hidg_plat_driver);
 	}else
 	{
-		pr_err("usb_composite_probe hidg_driver ok\n");
+		pr_err("usb_composite_probe acm_ms_driver ok\n");
 	}
 
 	return status;
@@ -559,7 +559,7 @@ static void __exit hidg_cleanup(void)
 {
 
 	pr_err("hidg_cleanup\n");
-	usb_composite_unregister(&hidg_driver);
+	usb_composite_unregister(&acm_ms_driver);
 //add 4
 	pr_err("platform_device_unregister my_hid\n");
 	platform_device_unregister(&my_hid);
